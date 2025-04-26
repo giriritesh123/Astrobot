@@ -1,42 +1,78 @@
 import streamlit as st
+from datetime import datetime
 
-# Life Path Meanings Dictionary
-life_path_meanings = {
-    1: "Leader, Independent, Strong-willed",
-    2: "Diplomatic, Sensitive, Cooperative",
+# Mulank and Bhagyank meanings (basic examples)
+mulank_meanings = {
+    1: "Leader, Independent, Strong",
+    2: "Cooperative, Diplomatic, Sensitive",
     3: "Creative, Expressive, Cheerful",
     4: "Practical, Hardworking, Reliable",
-    5: "Adventurous, Freedom-loving, Energetic",
-    6: "Nurturing, Responsible, Protective",
-    7: "Analytical, Introspective, Spiritual",
-    8: "Ambitious, Efficient, Materially-successful",
-    9: "Compassionate, Humanitarian, Generous",
-    11: "Visionary, Inspirational, Enlightened",
-    22: "Master Builder, Practical Visionary, Powerful Achiever"
+    5: "Adventurous, Dynamic, Free-spirited",
+    6: "Caring, Responsible, Nurturing",
+    7: "Spiritual, Analytical, Deep Thinker",
+    8: "Ambitious, Efficient, Business-minded",
+    9: "Compassionate, Humanitarian, Wise"
+}
+
+bhagyank_meanings = {
+    1: "Leadership qualities will bring success.",
+    2: "Collaboration and partnerships bring growth.",
+    3: "Creative expression leads to fortune.",
+    4: "Hard work and structure shape destiny.",
+    5: "Flexibility and change open new paths.",
+    6: "Family, harmony and service define your journey.",
+    7: "Spirituality and wisdom are your strengths.",
+    8: "Business, power and authority await you.",
+    9: "Charity and compassion will reward you."
 }
 
 # Streamlit Page Config
-st.set_page_config(page_title="Astrology & Numerology Bot", page_icon="🔮", layout="wide")
+st.set_page_config(page_title="Astrology & Numerology Bot", page_icon="🔮", layout="centered")
+
+# Title
+st.title("🔮 AstroBot - DOB Based Numerology Insights")
 
 # Sidebar for Input
-st.sidebar.header("🔢 Enter your Details")
-life_path_number = st.sidebar.number_input("Enter your Life Path Number (1-9, 11, 22)", min_value=1, max_value=22, step=1)
+st.sidebar.header("Enter your Birth Details")
+dob = st.sidebar.date_input("Enter your Date of Birth:")
 
-# Main Title
-st.title("🔮 Astrology & Numerology Bot")
-st.markdown("## Discover Your Life Path Meaning 🌟")
+# Calculate Mulank
+def calculate_mulank(dob):
+    day = dob.day
+    while day > 9:
+        day = sum(map(int, str(day)))
+    return day
 
-# Button to Generate Meaning
-if st.sidebar.button("Show Meaning"):
-    if life_path_number in life_path_meanings:
-        meaning = life_path_meanings[life_path_number]
-        st.success(f"✨ **Your Life Path Number {life_path_number} Meaning:** {meaning}")
-    else:
-        st.error("❌ Please enter a valid Life Path Number (1-9, 11, or 22).")
+# Calculate Bhagyank (Sum of DDMMYYYY digits)
+def calculate_bhagyank(dob):
+    digits = f"{dob.day:02d}{dob.month:02d}{dob.year}"
+    total = sum(map(int, digits))
+    while total > 9:
+        total = sum(map(int, str(total)))
+    return total
 
-# Fun Message
-st.markdown("---")
-st.info("🌱 _'Your journey is written in the stars. Believe in yourself and shine bright!'_")
+# Calculate Life Path Number (similar to Bhagyank)
+def calculate_life_path(dob):
+    total = sum(map(int, dob.strftime("%Y%m%d")))
+    while total > 9 and total not in [11, 22]:
+        total = sum(map(int, str(total)))
+    return total
+
+# Button to Process
+if st.sidebar.button("Show My Astro Details"):
+    mulank = calculate_mulank(dob)
+    bhagyank = calculate_bhagyank(dob)
+    life_path = calculate_life_path(dob)
+
+    st.markdown("---")
+    st.subheader("🌟 Your Numerology Insights:")
+
+    st.success(f"🔢 **Mulank (Moolank): {mulank}** - {mulank_meanings.get(mulank, 'Special Personality')}")
+    st.success(f"🔮 **Bhagyank (Destiny Number): {bhagyank}** - {bhagyank_meanings.get(bhagyank, 'Special Destiny Path')}")
+    st.success(f"🌈 **Life Path Number: {life_path}** - Reflects your spiritual journey.")
+
+    st.markdown("---")
+    st.info("✨ _'Your date of birth hides powerful secrets. Embrace your unique journey.'_")
 
 # Footer
 st.markdown(
