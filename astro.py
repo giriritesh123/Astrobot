@@ -1,8 +1,3 @@
-
-
-# Initialize colorama
-init(autoreset=True)
-
 def calculate_moolank(day):
     while day > 9:
         day = sum(map(int, str(day)))
@@ -64,42 +59,3 @@ def features_of_person(moolank):
         6: "🎶 Responsible, caring, artistic.",
         7: "🔮 Spiritual, thinker, introverted.",
         8: "🏆 Powerful, ambitious, goal-oriented.",
-        9: "❤️ Compassionate, brave, selfless."
-    }
-    return features.get(moolank, "✨ Personality traits not defined.")
-
-def main():
-    print(Fore.CYAN + Style.BRIGHT + "\n🔮 Welcome to Astro Numerology Bot 🔮\n")
-    
-    dob_input = input(Fore.YELLOW + "📅 Enter your Date of Birth (DD-MM-YYYY): ")
-    time_input = input(Fore.YELLOW + "⏰ Enter your Time of Birth (HH:MM AM/PM): ")
-    location_input = input(Fore.YELLOW + "📍 Enter your Birth Location: ")
-    
-    try:
-        day, month, year = map(int, dob_input.strip().split('-'))
-    except:
-        print(Fore.RED + "❌ Invalid date format. Please enter in DD-MM-YYYY format.")
-        return
-    
-    moolank = calculate_moolank(day)
-    bhagyank = calculate_bhagyank(day, month, year)
-    sun_sign = calculate_sun_sign(month, day)
-    direction = suggest_direction(moolank)
-    features = features_of_person(moolank)
-    
-    print(Fore.GREEN + "\n✨ Your Astro-Numerology Report ✨\n")
-    print(Fore.BLUE + f"📅 Date of Birth: {dob_input}")
-    print(Fore.BLUE + f"⏰ Birth Time: {time_input}")
-    print(Fore.BLUE + f"📍 Birth Location: {location_input}\n")
-    
-    print(Fore.MAGENTA + f"🔢 Your Moolank (मूलांक): {moolank}")
-    print(Fore.MAGENTA + f"🎯 Your Bhagyank (भाग्यांक): {bhagyank}")
-    print(Fore.MAGENTA + f"♈ Your Sun Sign: {sun_sign}\n")
-    
-    print(Fore.CYAN + f"{direction}")
-    print(Fore.CYAN + f"{features}")
-    
-    print(Fore.LIGHTYELLOW_EX + "\n🌟 Thank you for using Astro Numerology Bot! 🌟\n")
-
-if __name__ == "__main__":
-    main()
