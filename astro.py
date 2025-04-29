@@ -5,7 +5,7 @@ def calculate_moolank(day):
 
 def calculate_bhagyank(day, month, year):
     total = day + month + year
-    while total > 9 and total != 11 and total != 22:
+    while total > 9 and total not in (11, 22):
         total = sum(map(int, str(total)))
     return total
 
@@ -59,3 +59,6 @@ def features_of_person(moolank):
         6: "🎶 Responsible, caring, artistic.",
         7: "🔮 Spiritual, thinker, introverted.",
         8: "🏆 Powerful, ambitious, goal-oriented.",
+        9: "❤️ Compassionate, brave, selfless."
+    }
+    return features.get(moolank, "✨ Personality traits not defined.")
