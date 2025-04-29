@@ -1,3 +1,19 @@
+from kundali import get_kundali_table
+
+# Convert date input to YYYY-MM-DD
+date_parts = dob_input.split("-")
+date_iso = f"{date_parts[2]}-{date_parts[1]}-{date_parts[0]}"
+
+# Set default lat/lon for now (Varanasi as example)
+kundali_data = get_kundali_table(date_iso, time_input.split(" ")[0], "25.3176", "82.9739")
+
+st.subheader("🪐 Kundali Chart (Planetary Positions)")
+st.table(kundali_data)
+
+
+
+
+
 import streamlit as st
 from astro import calculate_moolank, calculate_bhagyank, calculate_sun_sign, suggest_direction, features_of_person
 
