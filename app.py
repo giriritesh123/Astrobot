@@ -44,17 +44,19 @@ if submitted:
 
         # ✅ Horoscope section correctly placed
         st.subheader("🌟 Today's Horoscope")
-        astro = get_astrology_report(zodiac_sign)
-st.json(astro) 
-        if "error" not in astro:
-            st.write(f"**Mood:** {astro['mood']}")
-            st.write(f"**Description:** {astro['description']}")
-            st.write(f"**Lucky Color:** {astro['color']}")
-            st.write(f"**Lucky Number:** {astro['lucky_number']}")
-            st.write(f"**Lucky Time:** {astro['lucky_time']}")
-            st.write(f"**Compatibility:** {astro['compatibility']}")
-        else:
-            st.warning("Could not fetch horoscope today.")
+
+astro = get_astrology_report(zodiac_sign)
+st.json(astro)  # 👈 must be inside the try block
+
+if "error" not in astro:
+    st.write(f"**Mood:** {astro['mood']}")
+    st.write(f"**Description:** {astro['description']}")
+    st.write(f"**Lucky Color:** {astro['color']}")
+    st.write(f"**Lucky Number:** {astro['lucky_number']}")
+    st.write(f"**Lucky Time:** {astro['lucky_time']}")
+    st.write(f"**Compatibility:** {astro['compatibility']}")
+else:
+    st.warning("Could not fetch horoscope today.")
 
         st.balloons()
 
