@@ -1,5 +1,6 @@
 from kundali import get_kundali_table
 
+
 # Convert date input to YYYY-MM-DD
 date_parts = dob_input.split("-")
 date_iso = f"{date_parts[2]}-{date_parts[1]}-{date_parts[0]}"
