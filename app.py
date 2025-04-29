@@ -27,7 +27,6 @@ if submitted:
         bhagyank = calculate_bhagyank(day, month, year)
         sun_sign = calculate_sun_sign(month, day)
         zodiac_sign = sun_sign.split(" ")[0].lower()
- 
 
         direction = suggest_direction(moolank)
         traits = features_of_person(moolank)
@@ -43,9 +42,10 @@ if submitted:
         st.subheader("♈ Sun Sign")
         st.write(f"**Zodiac Sign:** {sun_sign}")
 
+        # ✅ Horoscope section correctly placed
         st.subheader("🌟 Today's Horoscope")
-astro = get_astrology_report(zodiac_sign)
-        astro = get_astrology_report(sun_sign)
+        astro = get_astrology_report(zodiac_sign)
+
         if "error" not in astro:
             st.write(f"**Mood:** {astro['mood']}")
             st.write(f"**Description:** {astro['description']}")
@@ -59,4 +59,4 @@ astro = get_astrology_report(zodiac_sign)
         st.balloons()
 
     except Exception as e:
-        st.error(f"❌ Error: Please enter DOB in DD-MM-YYYY format correctly.")
+        st.error(f"❌ Error: {e}")
