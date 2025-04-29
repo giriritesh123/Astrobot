@@ -45,7 +45,7 @@ if submitted:
         # ✅ Horoscope section correctly placed
         st.subheader("🌟 Today's Horoscope")
         astro = get_astrology_report(zodiac_sign)
-
+st.json(astro) 
         if "error" not in astro:
             st.write(f"**Mood:** {astro['mood']}")
             st.write(f"**Description:** {astro['description']}")
