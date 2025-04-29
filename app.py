@@ -26,6 +26,9 @@ if submitted:
         moolank = calculate_moolank(day)
         bhagyank = calculate_bhagyank(day, month, year)
         sun_sign = calculate_sun_sign(month, day)
+        zodiac_sign = sun_sign.split(" ")[0].lower()
+ 
+
         direction = suggest_direction(moolank)
         traits = features_of_person(moolank)
         field = suitable_field(moolank)
@@ -41,6 +44,7 @@ if submitted:
         st.write(f"**Zodiac Sign:** {sun_sign}")
 
         st.subheader("🌟 Today's Horoscope")
+astro = get_astrology_report(zodiac_sign)
         astro = get_astrology_report(sun_sign)
         if "error" not in astro:
             st.write(f"**Mood:** {astro['mood']}")
