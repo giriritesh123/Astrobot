@@ -1,19 +1,16 @@
-import requests
-
-def get_astrology_report(sign):
-    url = "https://best-daily-astrology-and-horoscope-api.p.rapidapi.com/api/Detailed-Horoscope/"
-
-    querystring = {"zodiacSign": sign}
-
-    headers = {
-        "x-rapidapi-host": "best-daily-astrology-and-horoscope-api.p.rapidapi.com",
-        "x-rapidapi-key": "b18a9b3721msh531816298cc20a1p17b496jsn143ef513e88d"  # 🔐 Your key
+def get_zodiac_message(sign):
+    messages = {
+        "aries": "You're bold and ambitious. Take charge today!",
+        "taurus": "Your calm energy attracts success. Be steady.",
+        "gemini": "Talk, connect, and learn — it's your day to shine!",
+        "cancer": "Nurture your dreams. Your softness is your strength.",
+        "leo": "Shine like the sun. You're meant to be seen.",
+        "virgo": "Your detail-oriented nature makes you unbeatable today.",
+        "libra": "Balance, charm, and harmony will guide your way.",
+        "scorpio": "You're magnetic today. Trust your deep instincts.",
+        "sagittarius": "Expand your mind. Travel mentally or physically.",
+        "capricorn": "Discipline + determination = big results today.",
+        "aquarius": "Think differently. Your ideas can spark change.",
+        "pisces": "Dream and create. Your intuition is strong today."
     }
-
-    response = requests.get(url, headers=headers, params=querystring)
-
-    try:
-        return response.json()
-    except:
-        return {"error": "Failed to decode JSON"}
-
+    return messages.get(sign.lower(), "You're amazing! Trust yourself.")
