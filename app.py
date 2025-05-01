@@ -26,10 +26,7 @@ if submitted:
         moolank = calculate_moolank(day)
         bhagyank = calculate_bhagyank(day, month, year)
         sun_sign = calculate_sun_sign(month, day)
-        zodiac_sign = sun_sign.lower()  # simple lowercase, like 'leo'
-
-        st.write(f"Zodiac Sign Used for API: {zodiac_sign}")
-
+        zodiac_sign = sun_sign.lower()  # expected like 'leo'
 
         direction = suggest_direction(moolank)
         traits = features_of_person(moolank)
@@ -44,11 +41,11 @@ if submitted:
 
         st.subheader("♈ Sun Sign")
         st.write(f"**Zodiac Sign:** {sun_sign}")
+        st.write(f"Zodiac Sign Used for API: {zodiac_sign}")
 
-        # ✅ Horoscope section inside try
         st.subheader("🌟 Daily Horoscope")
         astro = get_astrology_report(zodiac_sign)
-st.json(astro) 
+        st.json(astro)  # ✅ placed properly inside try block
 
         if "error" not in astro:
             st.write(f"**Zodiac:** {astro['zodiacSign']}")
