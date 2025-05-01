@@ -7,7 +7,7 @@ from astro import (
     features_of_person,
     suitable_field
 )
-from astro_api import get_astrology_report
+from astro_api import get_zodiac_message  # ✅ use this now instead of API
 
 st.set_page_config(page_title="Astro Numerology Bot", page_icon="🔮")
 
@@ -26,7 +26,7 @@ if submitted:
         moolank = calculate_moolank(day)
         bhagyank = calculate_bhagyank(day, month, year)
         sun_sign = calculate_sun_sign(month, day)
-        zodiac_sign = sun_sign.lower()  # expected like 'leo'
+        zodiac_sign = sun_sign.lower()
 
         direction = suggest_direction(moolank)
         traits = features_of_person(moolank)
@@ -41,17 +41,11 @@ if submitted:
 
         st.subheader("♈ Sun Sign")
         st.write(f"**Zodiac Sign:** {sun_sign}")
-        st.write(f"Zodiac Sign Used for API: {zodiac_sign}")
 
-        st.subheader("🌟 Daily Horoscope")
-        astro = get_astrology_report(zodiac_sign)
-        st.json(astro)  # ✅ placed properly inside try block
-
-        if "error" not in astro:
-            st.write(f"**Zodiac:** {astro['zodiacSign']}")
-            st.write(f"**Horoscope:** {astro['horoscopeDescription']}")
-        else:
-            st.warning("Could not fetch horoscope today.")
+        # ✅ Horoscope-style message using predefined text
+        message = get_zodiac_message(zodiac_sign)
+        st.subheader("🌟 Today's Message")
+        st.write(message)
 
         st.balloons()
 
