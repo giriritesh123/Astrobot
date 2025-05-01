@@ -43,21 +43,18 @@ if submitted:
         st.write(f"**Zodiac Sign:** {sun_sign}")
 
         st.subheader("🌟 Today's Horoscope")
-        astro = get_astrology_report(zodiac_sign)
+    
 
-        st.json(astro)  # 👈 This shows the raw data (for debugging)
 
-        if "error" not in astro:
-            st.write(f"**Mood:** {astro['mood']}")
-            st.write(f"**Description:** {astro['description']}")
-            st.write(f"**Lucky Color:** {astro['color']}")
-            st.write(f"**Lucky Number:** {astro['lucky_number']}")
-            st.write(f"**Lucky Time:** {astro['lucky_time']}")
-            st.write(f"**Compatibility:** {astro['compatibility']}")
-        else:
-            st.warning("Could not fetch horoscope today.")
 
-        st.balloons()
 
-    except Exception as e:
-        st.error(f"❌ Error: {e}")
+astro = get_astrology_report(zodiac_sign)
+
+if "error" not in astro:
+    st.subheader("🌟 Daily Horoscope")
+    st.write(f"**Zodiac:** {astro['zodiacSign']}")
+    st.write(f"**Horoscope:** {astro['horoscopeDescription']}")
+else:
+    st.warning("Could not fetch horoscope.")
+
+
