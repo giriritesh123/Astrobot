@@ -28,6 +28,9 @@ if submitted:
         sun_sign = calculate_sun_sign(month, day)
         zodiac_sign = sun_sign.lower()  # simple lowercase, like 'leo'
 
+        st.write(f"Zodiac Sign Used for API: {zodiac_sign}")
+
+
         direction = suggest_direction(moolank)
         traits = features_of_person(moolank)
         field = suitable_field(moolank)
@@ -45,6 +48,7 @@ if submitted:
         # ✅ Horoscope section inside try
         st.subheader("🌟 Daily Horoscope")
         astro = get_astrology_report(zodiac_sign)
+st.json(astro) 
 
         if "error" not in astro:
             st.write(f"**Zodiac:** {astro['zodiacSign']}")
