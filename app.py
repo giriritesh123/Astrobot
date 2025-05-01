@@ -26,7 +26,7 @@ if submitted:
         moolank = calculate_moolank(day)
         bhagyank = calculate_bhagyank(day, month, year)
         sun_sign = calculate_sun_sign(month, day)
-        zodiac_sign = sun_sign.split(" ")[0].lower()
+        zodiac_sign = sun_sign.lower()  # simple lowercase, like 'leo'
 
         direction = suggest_direction(moolank)
         traits = features_of_person(moolank)
@@ -42,19 +42,17 @@ if submitted:
         st.subheader("♈ Sun Sign")
         st.write(f"**Zodiac Sign:** {sun_sign}")
 
-        st.subheader("🌟 Today's Horoscope")
-    
+        # ✅ Horoscope section inside try
+        st.subheader("🌟 Daily Horoscope")
+        astro = get_astrology_report(zodiac_sign)
 
+        if "error" not in astro:
+            st.write(f"**Zodiac:** {astro['zodiacSign']}")
+            st.write(f"**Horoscope:** {astro['horoscopeDescription']}")
+        else:
+            st.warning("Could not fetch horoscope today.")
 
+        st.balloons()
 
-
-astro = get_astrology_report(zodiac_sign)
-
-if "error" not in astro:
-    st.subheader("🌟 Daily Horoscope")
-    st.write(f"**Zodiac:** {astro['zodiacSign']}")
-    st.write(f"**Horoscope:** {astro['horoscopeDescription']}")
-else:
-    st.warning("Could not fetch horoscope.")
-
-
+    except Exception as e:
+        st.error(f"❌ Error: {e}")
